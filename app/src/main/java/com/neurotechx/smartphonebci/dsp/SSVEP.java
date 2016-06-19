@@ -72,7 +72,7 @@ public class SSVEP {
         Goertzel filterFreqHarmonic = new Goertzel(mSamplingFreq,freq*2,mEpoch.length);
         double power = DoubleMath.mean(filterFreq.processSignal(mEpoch));
         double powerHarmonic = DoubleMath.mean(filterFreqHarmonic.processSignal(mEpoch));
-        return (power+powerHarmonic)/2;
+        return (power+powerHarmonic);
 
 
     }
