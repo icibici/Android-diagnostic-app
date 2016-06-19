@@ -25,8 +25,8 @@ package com.neurotechx.smartphonebci.dsp;
  */
 public class Goertzel {
 
-    private float mSamplingRate;
-    private float mTargetFrequency;
+    private double mSamplingRate;
+    private double mTargetFrequency;
     private int mBlockSize;
 
     private double mCoeff, mQ1, mQ2;
@@ -41,7 +41,7 @@ public class Goertzel {
      * @param sampleRate is the sampling rate of the signal to be analyzed
      * @param targetFreq is the frequency that Goertzel will look for.
      */
-    public Goertzel(float sampleRate, float targetFreq, int blockSize) {
+    public Goertzel(double sampleRate, double targetFreq, int blockSize) {
         mSamplingRate = sampleRate;
         mTargetFrequency = targetFreq;
         mBlockSize = blockSize;
