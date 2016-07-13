@@ -1,10 +1,14 @@
 package com.neurotechx.smartphonebci;
 
+import android.media.AudioFormat;
 import android.media.AudioManager;
+import android.media.AudioRecord;
 import android.media.AudioTrack;
+import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -53,6 +57,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    int BufferElements2Rec = 1024; // want to play 2048 (2K) since 2 bytes we use only 1024
+    int BytesPerElement = 2; // 2 bytes in 16bit format
+
+    class AudioRecordThread implements Runnable {
+        @Override
+        public void run() {
+
+
+            int bufferReadResult;
+            AudioRecord audioRecord;
+            int samplingRate = 44100;
+
+
+            int bufferLen = 2048;//AudioRecord.getMinBufferSize(samplingRate,
+             //       CHANNEL_OUT_MONO, ENCODING_PCM_16BIT);
+            short[] audioData = new short[bufferLen];
+            /* set audio recorder parameters, and start recording */
+            audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, samplingRate,
+                    AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferLen);
+            audioRecord.startRecording();
+
+            boolean isAudioRecording = true;
+
+            int read =0;
+            while (isAudioRecording) {
+                read = audioRecord.read(audioData, 0, audioData.length);
+                Log.d("MIC", "Read "+read);
+            }
+
+
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        new Thread(new AudioRecordThread()).start();
 
 
     }
