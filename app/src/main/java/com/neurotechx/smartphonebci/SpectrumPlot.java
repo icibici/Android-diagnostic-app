@@ -84,6 +84,9 @@ public class SpectrumPlot extends Fragment {
 
         // rotate domain labels 45 degrees to make them more compact horizontally:
         plot.getGraphWidget().setDomainLabelOrientation(-45);
+        plot.getGraphWidget().setPaddingBottom(30);
+
+
         // Inflate the layout for this fragment
         return view;
     }

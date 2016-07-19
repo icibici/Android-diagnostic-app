@@ -7,11 +7,12 @@
 
         <com.androidplot.xy.XYPlot
             android:id="@+id/plot"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             ap:label="A Simple XY Plot"
             ap:rangeLabel="range"
             ap:domainLabel="domain"/>
+
 
 
 
