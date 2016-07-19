@@ -9,19 +9,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.neurotechx.smartphonebci.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Play"
         android:id="@+id/carrier_button"
-        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.neurotechx.smartphonebci.SpectrumPlot"
+        android:id="@+id/fragment"
+        android:layout_below="@+id/carrier_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="73dp" />
+        tools:layout="@layout/fragment_spectrum_plot" />
 </RelativeLayout>

@@ -16,7 +16,7 @@ public class Driver {
     public static class Configuration{
 
         //FFT window len
-        int mWindowLen = SAMPLING_RATE * 3;
+        int mWindowLen = 65536; // 0.67 frequency resolution
 
         //FFT step size
         int mWindowStepLen = (int) (SAMPLING_RATE * 0.25);
@@ -85,9 +85,13 @@ public class Driver {
 
     Driver(Configuration conf){
         player = new CarrierPlayer((float)conf.mCarrierFrequency);
+        player.stop();
+        player.execute();
+
         demodulator = conf.build();
         audioReader = new AudioReader(demodulator);
         //this is horrible, FIXME
+        audioReader.setProcessing(false);
         audioReader.start();
 
     }

@@ -44,7 +44,7 @@ public class AudioReader extends Thread {
                 AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferLen);
         audioRecord.startRecording();
 
-        isProcessing = true;
+      //  isProcessing = true;
         isRunning = true;
 
         int read = 0;

@@ -1,108 +1,147 @@
 package com.neurotechx.smartphonebci;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.XYPlot;
+import com.androidplot.xy.XYSeries;
+import com.google.common.base.Optional;
+import com.neurotechx.smartphonebci.dsp.BinnedValues;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SpectrumPlot.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link SpectrumPlot#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class SpectrumPlot extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private XYPlot plot;
+    private Spectrum spectrum = new Spectrum("Spectrum");
 
-    private OnFragmentInteractionListener mListener;
+    public SpectrumPlot() {
+    }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+
      * @return A new instance of fragment SpectrumPlot.
      */
     // TODO: Rename and change types and number of parameters
-    public static SpectrumPlot newInstance(String param1, String param2) {
+    public static SpectrumPlot newInstance() {
         SpectrumPlot fragment = new SpectrumPlot();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
+        //TODO omg I'm in a hury!
+
         return fragment;
-    }
-    public SpectrumPlot() {
-        // Required empty public constructor
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        MainActivity.plot=Optional.of(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+        View view = inflater.inflate(R.layout.fragment_spectrum_plot, container, false);
+
+        // initialize our XYPlot reference:
+        plot = (XYPlot) view.findViewById(R.id.plot);
+
+
+
+        // create formatters to use for drawing a series using LineAndPointRenderer
+        // and configure them from xml:
+        LineAndPointFormatter series1Format = new LineAndPointFormatter();
+        //series1//Format.setPointLabelFormatter(new PointLabelFormatter());
+
+       // series1Format.setInterpolationParams(
+        //        new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
+
+
+
+        // add a new series' to the xyplot:
+        plot.addSeries(spectrum , series1Format);
+
+
+        // reduce the number of range labels
+        plot.setTicksPerRangeLabel(3);
+
+        // rotate domain labels 45 degrees to make them more compact horizontally:
+        plot.getGraphWidget().setDomainLabelOrientation(-45);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_spectrum_plot, container, false);
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    public void push(BinnedValues values){
+        spectrum.setValues(values);
+        plot.redraw();
+    }
+
+
+    class Spectrum implements XYSeries {
+        private Optional<BinnedValues> values = Optional.absent();
+
+        private String title;
+
+
+        public Spectrum(String title) {
+            ;
+            this.title = title;
+        }
+
+
+        public void setValues(BinnedValues binnedValues){
+            values = Optional.of(binnedValues);
+        }
+
+        @Override
+        public String getTitle() {
+            return title;
+        }
+
+        @Override
+        public int size() {
+
+            if(values.isPresent()){
+                return values.get().getValues().length;
+            }
+            return 0;
+        }
+
+        @Override
+        public Number getX(int index) {
+            if (values.isPresent()) {
+                return values.get().getResolution()*index;
+
+            }
+            return 0;
+        }
+
+        @Override
+        public Number getY(int index) {
+            if (values.isPresent()) {
+                return values.get().getValues()[index   ];
+
+            }
+            return 0;
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

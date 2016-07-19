@@ -12,6 +12,8 @@ import com.neurotechx.smartphonebci.dsp.BinnedValuesListener;
 
 public class MainActivity extends AppCompatActivity implements BinnedValuesListener{
 
+    //SUPERDIRTY I'M IN A HUGE HURRY!!!
+    static Optional<SpectrumPlot> plot= Optional.absent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
 
     @Override
     public void onBinnedValues(BinnedValues values) {
-
+        if(plot.isPresent()){
+            plot.get().push(values);
+        }
     }
 }
