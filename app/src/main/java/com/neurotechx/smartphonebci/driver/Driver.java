@@ -21,11 +21,11 @@ public class Driver {
         //FFT step size
         int mWindowStepLen = (int) (SAMPLING_RATE * 0.25);
         //carrier freq default 1KHz
-        double mCarrierFrequency = 1000.;
+        double mCarrierFrequency = 1000;
         //lowest frquency to get from the carried signal
         double mCarriedMin = 0.;
         //highest frquency to get from the carried signal
-        double mCarriedMax = 32.;
+        double mCarriedMax = 45;
 
         final BinnedValuesListener mListener;
 

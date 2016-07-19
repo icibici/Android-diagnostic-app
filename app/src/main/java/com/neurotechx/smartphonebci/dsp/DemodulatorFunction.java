@@ -26,14 +26,14 @@ public class DemodulatorFunction implements Function<BinnedValues,BinnedValues> 
     @Override
     public BinnedValues apply(BinnedValues input) {
         //position of the carrier frequency
-        double carrierPos = input.getResolution() * this.mCarrierFrequency;
+       // double carrierPos = input.getResolution() * this.mCarrierFrequency;
 
-        int startPos = (int) (carrierPos + input.getResolution() * this.mCarrierFrequency * mMinCarriedFrequency);
+        int startPos = (int) ((this.mCarrierFrequency + mMinCarriedFrequency)/input.getResolution());
         int len = (int)((mMaxCarriedFrequency - mMinCarriedFrequency)/input.getResolution());
 
-        double values[]= new double[(int)len];
+        double values[]= new double[len];
         //Just copy the vaues of the array that correspond to those frequencies
-        System.arraycopy(input.getValues(),(int) startPos,values,0,len);
+        System.arraycopy(input.getValues(), startPos,values,0,len);
         return new DemoldulatedBinnedValues(values, input.getResolution());
     }
 
