@@ -34,14 +34,14 @@ public class Driver {
         }
 
 
-        public Configuration withWindowLen(double seconds) {
-            this.mWindowLen = (int) (SAMPLING_RATE * seconds);
+        public Configuration withWindowLen(int samples) {
+            this.mWindowLen = samples;
             return this;
 
         }
 
-        public Configuration withWindowStepLen(double seconds) {
-            this.mWindowStepLen = (int) (SAMPLING_RATE * seconds);
+        public Configuration withWindowStepLen(int samples) {
+            this.mWindowStepLen = samples;
             return this;
 
         }

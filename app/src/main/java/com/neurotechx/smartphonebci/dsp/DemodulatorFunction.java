@@ -29,7 +29,7 @@ public class DemodulatorFunction implements Function<BinnedValues,BinnedValues> 
         double carrierPos = input.getResolution() * this.mCarrierFrequency;
 
         int startPos = (int) (carrierPos + input.getResolution() * this.mCarrierFrequency * mMinCarriedFrequency);
-        int len = (int)(input.getResolution()*(mMaxCarriedFrequency - mMinCarriedFrequency));
+        int len = (int)((mMaxCarriedFrequency - mMinCarriedFrequency)/input.getResolution());
 
         double values[]= new double[(int)len];
         //Just copy the vaues of the array that correspond to those frequencies
