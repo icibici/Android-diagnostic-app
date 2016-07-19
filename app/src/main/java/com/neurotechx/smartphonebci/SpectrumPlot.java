@@ -1,5 +1,6 @@
 package com.neurotechx.smartphonebci;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -67,7 +68,8 @@ public class SpectrumPlot extends Fragment {
 
         // create formatters to use for drawing a series using LineAndPointRenderer
         // and configure them from xml:
-        LineAndPointFormatter series1Format = new LineAndPointFormatter();
+        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.GREEN,null,null,null);
+
         //series1//Format.setPointLabelFormatter(new PointLabelFormatter());
 
        // series1Format.setInterpolationParams(
@@ -84,7 +86,7 @@ public class SpectrumPlot extends Fragment {
 
         // rotate domain labels 45 degrees to make them more compact horizontally:
         plot.getGraphWidget().setDomainLabelOrientation(-45);
-        plot.getGraphWidget().setPaddingBottom(30);
+        plot.getGraphWidget().setPaddingBottom(100);
 
 
         // Inflate the layout for this fragment
