@@ -139,9 +139,9 @@ public class SpectrumPlot extends Fragment {
 
         @Override
         public Number getY(int index) {
-            if (values.isPresent()) {
-                return values.get().getValues()[index   ];
-
+            // avoid showing carrier frequencies
+            if (index > 1 && values.isPresent()) {
+                return values.get().getValues()[index];
             }
             return 0;
         }
