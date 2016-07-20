@@ -4,7 +4,7 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
-import com.neurotechx.smartphonebci.dsp.SlidingWindow;
+import com.neurotechx.smartphonebci.driver.dsp.SlidingWindow;
 
 /**
  * Created by javi on 18/07/16.

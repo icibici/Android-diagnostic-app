@@ -1,4 +1,4 @@
-package com.neurotechx.smartphonebci.dsp;
+package com.neurotechx.smartphonebci.driver.dsp;
 
 /**
  * Created by javi on 19/06/16.

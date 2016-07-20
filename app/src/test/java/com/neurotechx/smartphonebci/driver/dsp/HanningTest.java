@@ -1,4 +1,4 @@
-package com.neurotechx.smartphonebci.dsp;
+package com.neurotechx.smartphonebci.driver.dsp;
 
 import org.junit.Assert;
 import org.junit.Test;

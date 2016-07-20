@@ -1,4 +1,4 @@
-package com.neurotechx.smartphonebci.dsp;
+package com.neurotechx.smartphonebci.driver.dsp;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;

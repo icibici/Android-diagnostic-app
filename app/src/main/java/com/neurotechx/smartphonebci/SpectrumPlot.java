@@ -11,7 +11,7 @@ import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.google.common.base.Optional;
-import com.neurotechx.smartphonebci.dsp.BinnedValues;
+import com.neurotechx.smartphonebci.driver.dsp.BinnedValues;
 
 
 /**
@@ -106,7 +106,6 @@ public class SpectrumPlot extends Fragment {
 
 
         public Spectrum(String title) {
-            ;
             this.title = title;
         }
 

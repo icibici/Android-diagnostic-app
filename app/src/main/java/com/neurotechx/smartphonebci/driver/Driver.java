@@ -1,9 +1,9 @@
 package com.neurotechx.smartphonebci.driver;
 
 import com.google.common.base.Optional;
-import com.neurotechx.smartphonebci.dsp.BinnedValuesListener;
-import com.neurotechx.smartphonebci.dsp.DemodulatorBuilder;
-import com.neurotechx.smartphonebci.dsp.SlidingWindow;
+import com.neurotechx.smartphonebci.driver.dsp.BinnedValuesListener;
+import com.neurotechx.smartphonebci.driver.dsp.DemodulatorBuilder;
+import com.neurotechx.smartphonebci.driver.dsp.SlidingWindow;
 
 /**
  * Created by javi on 18/07/16.
