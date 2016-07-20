@@ -45,6 +45,9 @@ public class CarrierPlayer extends AsyncTask<Void, Void, Void> {
                 buffer[i] = (short) (Math.sin(angle) * Short.MAX_VALUE);
                 angle += increment;
             }
+            //avoid overflows
+            angle = angle % (int)(44100/mCarrierFreq);
+
             if (this.mPlaying) {
                 mTrack.write(buffer, 0, buffer.length);  //write to the audio buffer.... and start all over again!
             }
