@@ -1,10 +1,12 @@
 package com.neurotechx.smartphonebci;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.google.common.base.Optional;
 import com.neurotechx.smartphonebci.driver.Driver;
@@ -20,7 +22,8 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
     static Optional<SpectrumPlot> plot = Optional.absent();
 
     SSVEP ssvep;
-
+    TextView []classBoxes = new TextView[2];
+    SeekBar bar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +52,11 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
 
             }
         });
-
-
+        classBoxes[0] = (TextView) findViewById(R.id.class_view);
+        classBoxes[1] = (TextView) findViewById(R.id.class_view1);
+        bar = (SeekBar) findViewById(R.id.seekBar);
+        bar.setIndeterminate(false);
+        bar.setMax(100);
     }
 
 
@@ -61,9 +67,28 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
         }
         ssvep.push(values);
     }
-
+    static String FORMAT = "%.2f";
     @Override
-    public void onEvent(Event e) {
-        Log.d("SSVEP", e.getSelectedClass()+"");
+    public void onEvent(final Event e) {
+
+        runOnUiThread(new Runnable(){
+
+            @Override
+            public void run() {
+                double progress = e.getEpochProgress();
+                classBoxes[0].setText(String.format(FORMAT,e.getClassDistribution()[0]));
+                classBoxes[1].setText(String.format(FORMAT,e.getClassDistribution()[1]));
+                int ior=(int)(e.getEpochProgress()*100);
+                bar.setProgress((int)(e.getEpochProgress()*100));
+                //end of epoch mark the final selection
+                if (e.getEpochProgress()==1.){
+                    int clazz = e.getSelectedClass();
+                    classBoxes[0].setBackgroundColor(Color.TRANSPARENT);
+
+                    classBoxes[1].setBackgroundColor(Color.TRANSPARENT);
+                    classBoxes[clazz].setBackgroundColor(Color.GREEN);
+                }
+            }
+        });
     }
 }

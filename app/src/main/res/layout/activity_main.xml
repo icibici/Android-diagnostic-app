@@ -14,16 +14,54 @@
         android:layout_height="wrap_content"
         android:text="Play"
         android:id="@+id/carrier_button"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="0.00"
+        android:id="@+id/class_view"
+        android:focusableInTouchMode="false"
+        android:gravity="center_vertical|center"
+        android:layout_alignTop="@+id/carrier_button"
+        android:layout_toRightOf="@+id/carrier_button"
+        android:layout_toEndOf="@+id/carrier_button" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="0.00"
+        android:id="@+id/class_view1"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp"
+        android:gravity="center_vertical|center"
+        android:layout_toRightOf="@+id/class_view"
+        android:layout_toEndOf="@+id/class_view" />
+
+
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:name="com.neurotechx.smartphonebci.SpectrumPlot"
         android:id="@+id/fragment"
-        android:layout_below="@+id/carrier_button"
+        android:layout_below="@+id/class_view"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         tools:layout="@layout/fragment_spectrum_plot" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_alignRight="@+id/fragment"
+        android:layout_alignEnd="@+id/fragment"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/class_view1"
+        android:layout_toEndOf="@+id/class_view1"
+        android:max="100"
+        android:progress="80" />
+
+
 </RelativeLayout>

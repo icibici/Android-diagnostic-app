@@ -30,7 +30,7 @@ public class BandPowerAccessor {
             int len = (int) (Math.ceil(mEnd)-Math.ceil(mBegin));
             mWeights = new double[len];
             for (int i = 0; i < mWeights.length; i++) {
-                mWeights[0]=1;
+                mWeights[i]=1;
             }
             mWeights[0] -= (mBegin - Math.floor(mBegin));
             mWeights[mWeights.length-1] -= (Math.ceil(mEnd)-mEnd);

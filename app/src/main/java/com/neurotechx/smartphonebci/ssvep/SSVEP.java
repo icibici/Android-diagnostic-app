@@ -17,7 +17,7 @@ public class SSVEP {
     double mEpochPos = 0;
     double mPushFrequency;
     BandPowerAccessor.Band[] mClassBands;
-    double[] mClassMeans;
+    double[] mClassAccum;
     BandPowerAccessor mAccessor;
 
     /**
@@ -27,7 +27,7 @@ public class SSVEP {
         mEpochLen = epochLen;
         mPushFrequency = pushFrequency;
         mClassBands = classBands;
-        mClassMeans = new double[mClassBands.length];
+        mClassAccum = new double[mClassBands.length];
         mListener = listener;
         mAccessor = new BandPowerAccessor(classBands);
     }
@@ -39,20 +39,20 @@ public class SSVEP {
     public synchronized void push(BinnedValues values){
         double total=0;
         double powers[] = mAccessor.getBandPowers(values);
-        for (int i = 0; i < mClassMeans.length ; i++) {
-            mClassMeans[i] += powers[i];
-            total+=mClassMeans[i];
+        for (int i = 0; i < mClassAccum.length ; i++) {
+            mClassAccum[i] += powers[i];
+            total+= mClassAccum[i];
         }
         mEpochPos+=mPushFrequency;
         double epochPercentage = Math.min(1.0,mEpochPos/mEpochLen);
-        double classes[] = new double[mClassMeans.length];
+        double classes[] = new double[mClassAccum.length];
         for (int i = 0; i < classes.length ; i++) {
-            classes[i]=mClassMeans[i]/total;
+            classes[i]= mClassAccum[i]/total;
         }
         SSVEPListener.Event event = new SSVEPListener.Event(epochPercentage,classes);
         this.mListener.onEvent(event);
         if (epochPercentage == 1.0){
-            mClassMeans = new double[mClassMeans.length];
+            mClassAccum = new double[mClassAccum.length];
             mEpochPos = 0;
         }
     }
