@@ -1,5 +1,6 @@
 package com.neurotechx.smartphonebci;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
 
         ssvep = new SSVEP(3.0, 0.25, new BandPowerAccessor.Band[]{
             new BandPowerAccessor.Band(5,7),
