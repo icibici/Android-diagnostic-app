@@ -28,28 +28,25 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setContentView(R.layout.activity_main);
 
 
-        ssvep = new SSVEP(3.0, 0.25, new BandPowerAccessor.Band[]{
+        ssvep = new SSVEP(30.0, 0.25, new BandPowerAccessor.Band[]{
             new BandPowerAccessor.Band(5,7),
             new BandPowerAccessor.Band(9.5,10.5)},this);
 
-        final Optional<Driver> driver = Driver.getInstance(new Driver.Configuration(this));
-        if(!driver.isPresent()){
-            throw new IllegalStateException("No driver!!");
-        }
+
 
         final Button carrierButton = (Button) findViewById(R.id.carrier_button);
         carrierButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (carrierButton.getText().equals("Play")) {
-                    driver.get().start();
+                    Driver.getInstance(new Driver.Configuration(MainActivity.this)).get().start();
                     ((Button) carrierButton).setText("Stop");
                 } else {
-                    driver.get().stop();
+                    Driver.getInstance().get().stop();
                     carrierButton.setText("Play");
                 }
 
@@ -78,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
 
             @Override
             public void run() {
+
                 double progress = e.getEpochProgress();
                 classBoxes[0].setText(String.format(FORMAT,e.getClassDistribution()[0]));
                 classBoxes[1].setText(String.format(FORMAT,e.getClassDistribution()[1]));
