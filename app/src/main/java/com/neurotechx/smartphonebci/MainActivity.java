@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
 
 
         ssvep = new SSVEP(30.0, 0.25, new BandPowerAccessor.Band[]{
-            new BandPowerAccessor.Band(5,7),
-            new BandPowerAccessor.Band(9.5,10.5)},this);
+            new BandPowerAccessor.Band(9.5,10.5),
+            new BandPowerAccessor.Band(14.5,16.5)},this);
 
 
 
