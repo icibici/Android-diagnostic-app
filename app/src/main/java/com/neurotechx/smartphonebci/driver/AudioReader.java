@@ -47,10 +47,9 @@ public class AudioReader extends Thread {
       //  isProcessing = true;
         isRunning = true;
 
-        int read = 0;
         while (this.isRunning) {
             if(this.isProcessing) {
-                read = audioRecord.read(audioData, 0, audioData.length);
+                audioRecord.read(audioData, 0, audioData.length);
                 sink.push(audioData);
             }
         }
