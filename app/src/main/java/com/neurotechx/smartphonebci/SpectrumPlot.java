@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.google.common.base.Optional;
+import com.google.common.primitives.Doubles;
 import com.neurotechx.smartphonebci.driver.dsp.BinnedValues;
+
+import java.util.Arrays;
 
 
 /**
@@ -25,7 +29,7 @@ public class SpectrumPlot extends Fragment {
 
     private XYPlot plot;
     private Spectrum spectrum = new Spectrum("Spectrum");
-
+    private double max = Double.MIN_VALUE;
     public SpectrumPlot() {
     }
 
@@ -87,7 +91,9 @@ public class SpectrumPlot extends Fragment {
         // rotate domain labels 45 degrees to make them more compact horizontally:
         plot.getGraphWidget().setDomainLabelOrientation(-45);
         plot.getGraphWidget().setPaddingBottom(50);
+        plot.getGraphWidget().setPaddingLeft(150);
 
+        plot.setRangeBoundaries(0,1,BoundaryMode.FIXED);
 
         // Inflate the layout for this fragment
         return view;
@@ -104,7 +110,7 @@ public class SpectrumPlot extends Fragment {
 
         private String title;
 
-
+        private double epochMax=Double.MIN_VALUE;
         public Spectrum(String title) {
             this.title = title;
         }
@@ -123,6 +129,12 @@ public class SpectrumPlot extends Fragment {
         public int size() {
 
             if(values.isPresent()){
+                double[] vals = Arrays.copyOfRange(values.get().getValues(),(int)(4*values.get().getResolution()),values.get().getValues().length-1);
+
+                epochMax = Doubles.max(vals);
+                if (epochMax ==0){
+                    epochMax =1;
+                }
                 return values.get().getValues().length;
             }
             return 0;
@@ -140,8 +152,10 @@ public class SpectrumPlot extends Fragment {
         @Override
         public Number getY(int index) {
             // avoid showing carrier frequencies
-            if (index > 1 && values.isPresent()) {
-                return values.get().getValues()[index];
+            if ( values.isPresent() && index > 4/values.get().getResolution()) {
+
+                double y = values.get().getValues()[index]/epochMax;
+                return y;
             }
             return 0;
         }
