@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.neurotechx.smartphonebci.AlphaFragment">
+
+    <com.androidplot.xy.XYPlot
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ap="http://schemas.android.com/apk/res-auto"
+
+        android:id="@+id/alpha_plot"
+        android:layout_width="match_parent"
+        android:layout_height="284dp"
+        androidplot.renderMode="use_background_thread"
+        ap:label="Alpha power"
+        ap:labelTextSize="15dp"
+        ap:domainLabel="Domain"
+        ap:graphBackgroundColor="#00ffffff"
+        ap:borderColor="#00ffffff"
+        ap:backgroundColor="#00ffffff"
+        ap:labelTextColor = "#000000"
+        ap:legendTextSize="15sp"
+        ap:legendIconHeight="15dp"
+        ap:legendIconWidth="15dp"
+        ap:legendHeight="50dp"
+        ap:legendAnchorPosition="right_middle" />
+
+</FrameLayout>

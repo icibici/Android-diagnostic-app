@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -41,22 +42,33 @@
         android:layout_toEndOf="@+id/class_view" />
 
 
-    <fragment
-        android:layout_width="wrap_content"
+    <!--<fragment-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:name="com.neurotechx.smartphonebci.SpectrumPlot"-->
+        <!--android:id="@+id/fragment"-->
+        <!--android:layout_below="@+id/class_view"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--tools:layout="@layout/fragment_spectrum_plot" />-->
+
+    <android.support.v4.view.ViewPager
+
+
+        android:id="@+id/container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.neurotechx.smartphonebci.SpectrumPlot"
-        android:id="@+id/fragment"
-        android:layout_below="@+id/class_view"
+
+        android:layout_below="@+id/carrier_button"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        tools:layout="@layout/fragment_spectrum_plot" />
+        android:layout_alignParentStart="true" />
 
     <SeekBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
-        android:layout_alignRight="@+id/fragment"
-        android:layout_alignEnd="@+id/fragment"
+        android:layout_alignRight="@+id/container"
+        android:layout_alignEnd="@+id/container"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/class_view1"
         android:layout_toEndOf="@+id/class_view1"

@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.google.common.base.Optional;
-import com.google.common.primitives.Doubles;
+import com.google.common.math.DoubleMath;
 import com.neurotechx.smartphonebci.driver.dsp.BinnedValues;
 
 import java.util.Arrays;
@@ -93,7 +92,7 @@ public class SpectrumPlot extends Fragment {
         plot.getGraphWidget().setPaddingBottom(50);
         plot.getGraphWidget().setPaddingLeft(150);
 
-        plot.setRangeBoundaries(0,1,BoundaryMode.FIXED);
+     //   plot.setRangeBoundaries(0,1,BoundaryMode.FIXED);
 
         // Inflate the layout for this fragment
         return view;
@@ -129,9 +128,9 @@ public class SpectrumPlot extends Fragment {
         public int size() {
 
             if(values.isPresent()){
-                double[] vals = Arrays.copyOfRange(values.get().getValues(),(int)(4*values.get().getResolution()),values.get().getValues().length-1);
+                double[] vals = Arrays.copyOfRange(values.get().getValues(),(int)(4/values.get().getResolution()),values.get().getValues().length-1);
 
-                epochMax = Doubles.max(vals);
+                epochMax = DoubleMath.mean(vals);
                 if (epochMax ==0){
                     epochMax =1;
                 }

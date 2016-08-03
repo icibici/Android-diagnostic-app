@@ -19,6 +19,8 @@ public class SSVEP {
     BandPowerAccessor.Band[] mClassBands;
     double[] mClassAccum;
     BandPowerAccessor mAccessor;
+    BandPowerAccessor mAll;
+
 
     /**
      *
@@ -30,6 +32,9 @@ public class SSVEP {
         mClassAccum = new double[mClassBands.length];
         mListener = listener;
         mAccessor = new BandPowerAccessor(classBands);
+        mAll = new BandPowerAccessor(new BandPowerAccessor.Band[]{
+                new BandPowerAccessor.Band(5,32)
+        });
     }
 
     /**
@@ -39,8 +44,9 @@ public class SSVEP {
     public synchronized void push(BinnedValues values){
         double total=0;
         double powers[] = mAccessor.getBandPowers(values);
+        double allPower = mAll.getBandPowers(values)[0];
         for (int i = 0; i < mClassAccum.length ; i++) {
-            mClassAccum[i] += powers[i];
+            mClassAccum[i] += powers[i]/allPower;
             total+= mClassAccum[i];
         }
         mEpochPos+=mPushFrequency;
