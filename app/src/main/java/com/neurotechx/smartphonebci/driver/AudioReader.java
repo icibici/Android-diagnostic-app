@@ -3,6 +3,7 @@ package com.neurotechx.smartphonebci.driver;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.media.audiofx.AutomaticGainControl;
 
 import com.neurotechx.smartphonebci.driver.dsp.SlidingWindow;
 
@@ -32,7 +33,6 @@ public class AudioReader extends Thread {
     public void run() {
 
 
-        int bufferReadResult;
         AudioRecord audioRecord;
 
 
@@ -42,6 +42,11 @@ public class AudioReader extends Thread {
             /* set audio recorder parameters, and start recording */
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, Driver.SAMPLING_RATE,
                 AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferLen);
+        //disable agc to avoid clipping
+        AutomaticGainControl agc = AutomaticGainControl.create(audioRecord.getAudioSessionId());
+        if(agc != null){
+            agc.setEnabled(false);
+        }
         audioRecord.startRecording();
 
       //  isProcessing = true;
