@@ -42,11 +42,6 @@ public class SpectrumPlot extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static SpectrumPlot newInstance() {
         SpectrumPlot fragment = new SpectrumPlot();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        //TODO omg I'm in a hury!
-
         return fragment;
 
     }

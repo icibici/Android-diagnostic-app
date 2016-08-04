@@ -38,8 +38,8 @@ public class AlphaPlot {
         LineAndPointFormatter formatter = new LineAndPointFormatter(
                 Color.rgb(118, 216, 227), null, null, null);
         formatter.getLinePaint().setStrokeJoin(Paint.Join.ROUND);
-        formatter.getLinePaint().setStrokeWidth(5);
-        mAlpha = new CircularSeries(40, 0, "Alpha");
+        formatter.getLinePaint().setStrokeWidth(8);
+        mAlpha = new CircularSeries(60, 0, "Alpha");
         final CircularFifoQueue<Number> buff = new CircularFifoQueue<>(5);
         mAlpha.setMapping(new Function<Number, Number>() {
             @Override

@@ -38,10 +38,10 @@ public class AudioReader extends Thread {
 
         int bufferLen = 2048;//AudioRecord.getMinBufferSize(samplingRate,
         //       CHANNEL_OUT_MONO, ENCODING_PCM_16BIT);
-        float[] audioData = new float[bufferLen];
+        short[] audioData = new short[bufferLen];
             /* set audio recorder parameters, and start recording */
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, Driver.SAMPLING_RATE,
-                AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_FLOAT, bufferLen);
+                AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferLen);
         audioRecord.startRecording();
 
       //  isProcessing = true;
@@ -49,7 +49,7 @@ public class AudioReader extends Thread {
 
         while (this.isRunning) {
             if(this.isProcessing) {
-                audioRecord.read(audioData, 0, audioData.length,AudioRecord.READ_BLOCKING);
+                audioRecord.read(audioData, 0, audioData.length);
                 sink.push(audioData);
             }
         }

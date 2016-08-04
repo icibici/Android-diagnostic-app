@@ -27,7 +27,7 @@ public class SlidingWindow {
     }
 
 
-    public void push(float data) {
+    public void push(short data) {
         mQueue.add((double) data);
         mWindowStep++;
         if (!mQueue.isAtFullCapacity()){
@@ -42,8 +42,8 @@ public class SlidingWindow {
         }
     }
 
-    public void push(float data[]) {
-        for (float d : data) {
+    public void push(short data[]) {
+        for (short d : data) {
             this.push(d);
         }
     }

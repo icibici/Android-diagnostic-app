@@ -9,7 +9,7 @@
             android:id="@+id/plot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            ap:label="A Simple XY Plot"
+            ap:label="Spectrum"
             ap:rangeLabel="range"
             ap:domainLabel="domain"/>
 

@@ -25,7 +25,7 @@ public class Driver {
         //lowest frquency to get from the carried signal
         double mCarriedMin = 0.;
         //highest frquency to get from the carried signal
-        double mCarriedMax = 45;
+        double mCarriedMax = 55;
 
         final BinnedValuesListener mListener;
 

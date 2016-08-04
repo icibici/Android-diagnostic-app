@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
     //SUPERDIRTY I'M IN A HUGE HURRY!!!
     static Optional<SpectrumPlot> plot = Optional.absent();
     static Optional<AlphaFragment> alpha = Optional.absent();
+    public static Optional<SanityCheckFragment> sanity = Optional.absent();
 
     SSVEP ssvep;
 
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
         if(alpha.isPresent()){
             alpha.get().push(values);
         }
+        if(sanity.isPresent()){
+            sanity.get().push(values);
+        }
         ssvep.push(values);
     }
     static String FORMAT = "%.2f";
@@ -126,15 +130,15 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
                     return SpectrumPlot.newInstance();
                 case 1:
                     return AlphaFragment.newInstance();
-
+                case 2:
+                    return SanityCheckFragment.newInstance();
             }
             throw new IllegalStateException("We should't be here! "+position);
         }
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
-            return 2;
+            return 3;
         }
 
         @Override
@@ -144,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
                     return "Spectrum";
                 case 1:
                     return "Alpha power";
+                case 2:
+                    return "Sanity check";
 
             }
             return null;
