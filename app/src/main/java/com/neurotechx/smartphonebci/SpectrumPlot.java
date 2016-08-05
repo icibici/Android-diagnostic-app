@@ -123,13 +123,18 @@ public class SpectrumPlot extends Fragment {
         public int size() {
 
             if(values.isPresent()){
-                double[] vals = Arrays.copyOfRange(values.get().getValues(),(int)(4/values.get().getResolution()),values.get().getValues().length-1);
+                //len minus 10Hz
+                int tenHz = (int)(10/values.get().getResolution());
+                double[] vals = Arrays.copyOfRange(
+                        values.get().getValues(),
+                        (int)(4/values.get().getResolution()),
+                        values.get().getValues().length-(1+tenHz));
 
                 epochMax = DoubleMath.mean(vals);
                 if (epochMax ==0){
                     epochMax =1;
                 }
-                return values.get().getValues().length;
+                return values.get().getValues().length-tenHz;
             }
             return 0;
         }
