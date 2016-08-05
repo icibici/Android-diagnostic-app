@@ -3,7 +3,7 @@
 **WARNING! DO NOT CONNECT THE SMARTPHONEBCI IF YOUR PHONE IS CHARGING! THIS COULD KILL YOU IF THERE'S A MALFUNCTION**
 
 This is the Android app for the [SmartphoneBCI project] (https://jmanart.github.io/smartphone-bci-hardware/).
-It allows to visualise the data read from the [SmartphoneBCI hardware ] (https://github.com/jmanart/smartphone-bci-hardware/)
+It allows to visualise the data read from the [SmartphoneBCI hardware ] (https://github.com/jmanart/smartphone-bci-hardware/) and it is under heavy development.
 
 There are three tabs (change from one to another by swiping) 
 
