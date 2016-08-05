@@ -73,17 +73,30 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
 
 
     @Override
-    public void onBinnedValues(BinnedValues values) {
-        if(plot.isPresent()){
-            plot.get().push(values);
-        }
-        if(alpha.isPresent()){
-            alpha.get().push(values);
-        }
-        if(sanity.isPresent()){
-            sanity.get().push(values);
-        }
-        ssvep.push(values);
+    public void onBinnedValues(final BinnedValues values) {
+        new Thread() {
+            public void run() {
+                if (plot.isPresent())
+
+                {
+                    plot.get().push(values);
+                }
+
+                if (alpha.isPresent())
+
+                {
+                    alpha.get().push(values);
+                }
+
+                if (sanity.isPresent())
+
+                {
+                    sanity.get().push(values);
+                }
+
+                ssvep.push(values);
+            }
+        }.start();
     }
     static String FORMAT = "%.2f";
     @Override
