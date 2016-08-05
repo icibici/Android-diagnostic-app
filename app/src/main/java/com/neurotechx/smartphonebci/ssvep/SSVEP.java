@@ -33,7 +33,7 @@ public class SSVEP {
         mListener = listener;
         mAccessor = new BandPowerAccessor(classBands);
         mAll = new BandPowerAccessor(new BandPowerAccessor.Band[]{
-                new BandPowerAccessor.Band(5,32)
+                new BandPowerAccessor.Band(8,32)
         });
     }
 
