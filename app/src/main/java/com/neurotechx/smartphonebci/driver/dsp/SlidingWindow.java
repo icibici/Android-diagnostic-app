@@ -2,8 +2,12 @@ package com.neurotechx.smartphonebci.driver.dsp;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.primitives.Doubles;
+import com.google.common.primitives.Shorts;
 
 import org.apache.commons.collections4.queue.CircularFifoQueue;
+
+import java.util.List;
 
 /**
  * Created by javi on 13/07/16.
@@ -27,9 +31,10 @@ public class SlidingWindow {
     }
 
 
-    public void push(short data) {
-        mQueue.add((double) data);
-        mWindowStep++;
+    public void push(short values[]) {
+        List<? extends  Number> data = Shorts.asList(values);
+        mQueue.addAll(Doubles.asList(Doubles.toArray(data)));
+        mWindowStep+=values.length;
         if (!mQueue.isAtFullCapacity()){
             return;
         }
@@ -42,10 +47,5 @@ public class SlidingWindow {
         }
     }
 
-    public void push(short data[]) {
-        for (short d : data) {
-            this.push(d);
-        }
-    }
 
 }
