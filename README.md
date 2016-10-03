@@ -1,6 +1,22 @@
-# smartphone-bci - The Android app
+----------------------------------------------------------------------------------------------------
 
 **WARNING! DO NOT CONNECT THE SMARTPHONEBCI IF YOUR PHONE IS CHARGING! THIS COULD KILL YOU IF THERE'S A MALFUNCTION**
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+# SMARTPHONE BCI
+
+[Smartphone-bci](https://jmanart.github.io/smartphone-bci-hardware) is a hardware / software platform born with the intention of Developing an EEG under £20.
+
+This is the **Software Repository** for the smartphone BCI Project Android App
+
+This repository is part of a Hardware - Software system:
+
+* [SMARTPHONE-BCI](https://github.com/capitancambio/smartphone-bci)
+* [SMARTPHONE-BCI-HARDWARE](https://github.com/jmanart/smartphone-bci-hardware)
+
+
+## The Android app
 
 This is the Android app for the [SmartphoneBCI project] (https://jmanart.github.io/smartphone-bci-hardware/).
 It allows to visualise the data read from the [SmartphoneBCI hardware ] (https://github.com/jmanart/smartphone-bci-hardware/) and it is under heavy development.
@@ -19,6 +35,7 @@ There should be two big peaks in the sanity check, one around 0 and one around 5
 
 
 TODO:
+
  - Use a C/C++ fft implementation.
  - Move the driver functionality to a separate project so it can be easily used in other apps.
  - The code is a bad state due to different rushes and time constrains, it needs a clean up. 
