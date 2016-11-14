@@ -13,7 +13,7 @@ EEG frequency analysis from the bipolar electrode:
 Power of the alpha band over time
 ![Power of the alpha band ](https://cloud.githubusercontent.com/assets/1718009/17438367/635871ca-5b1a-11e6-821e-49dd994b4856.png)
 
-There should be two big peaks in the sanity check, one around 0 and one around 50Hz (or 60Hz depending on your electrical mains)
+There should be two big peaks in the sanity check (electrodes not yet attached to head), one around 0 and one around 50Hz (or 60Hz depending on your electrical mains)
 ![Sanity check](https://cloud.githubusercontent.com/assets/1718009/17438370/653b9c4c-5b1a-11e6-8630-899ffeed751d.png)
 
 
