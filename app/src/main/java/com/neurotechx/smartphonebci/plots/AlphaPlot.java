@@ -71,10 +71,9 @@ public class AlphaPlot {
 
     public void push(BinnedValues values) {
             double alpha = mAccessor.getBandPowers(values)[0];
-            double lowerFreqs = mLowerThan.getBandPowers(values)[0];
             double higherFreqs = mGreaterThan.getBandPowers(values)[0];
 
-        mAlpha.getBuffer().add(alpha/(alpha+lowerFreqs+higherFreqs));
+        mAlpha.getBuffer().add(alpha/(alpha+higherFreqs));
         mPlot.redraw();
     }
 
