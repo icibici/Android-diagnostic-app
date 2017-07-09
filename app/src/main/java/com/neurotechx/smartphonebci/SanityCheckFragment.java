@@ -1,17 +1,17 @@
 package com.neurotechx.smartphonebci;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidplot.xy.XYPlot;
 import com.google.common.base.Optional;
 import com.neurotechx.smartphonebci.driver.dsp.BinnedValues;
-import com.neurotechx.smartphonebci.plots.AlphaPlot;
 import com.neurotechx.smartphonebci.plots.SanityCheckPlot;
+
+import java.text.DecimalFormat;
 
 
 /**
@@ -22,11 +22,13 @@ import com.neurotechx.smartphonebci.plots.SanityCheckPlot;
  * Use the {@link SanityCheckFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SanityCheckFragment extends Fragment {
+public class SanityCheckFragment extends Fragment
+{
 
-    Optional<SanityCheckPlot> mPlot= Optional.absent();
+    Optional<SanityCheckPlot> mPlot = Optional.absent();
 
-    public SanityCheckFragment() {
+    public SanityCheckFragment()
+    {
         // Required empty public constructor
     }
 
@@ -39,28 +41,41 @@ public class SanityCheckFragment extends Fragment {
      * @return A new instance of fragment SanityCheckFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SanityCheckFragment newInstance() {
+    public static SanityCheckFragment newInstance()
+    {
         SanityCheckFragment fragment = new SanityCheckFragment();
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        MainActivity.sanity= Optional.of(this);
+        MainActivity.sanity = Optional.of(this);
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_sanity_check, container, false);
         this.mPlot = Optional.of(new SanityCheckPlot(view));
+        XYPlot plot = (XYPlot) view.findViewById(R.id.sanity_plot);
+        plot.getGraphWidget().setDomainLabelOrientation(-45);
+        plot.getGraphWidget().setPaddingBottom(50);
+        plot.getGraphWidget().setPaddingLeft(120);
+        plot.getGraphWidget().setPaddingTop(20);
+        plot.getGraphWidget().setPaddingRight(20);
+        plot.setRangeValueFormat(new DecimalFormat("0.00"));
+        plot.setDomainValueFormat(new DecimalFormat("0.00"));
         return view;
     }
 
-    public void push(BinnedValues values){
-        if (mPlot.isPresent()){
+    public void push(BinnedValues values)
+    {
+        if (mPlot.isPresent())
+        {
             mPlot.get().push(values);
         }
     }

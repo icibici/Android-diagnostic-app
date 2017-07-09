@@ -14,6 +14,7 @@ import com.google.common.base.Optional;
 import com.google.common.math.DoubleMath;
 import com.neurotechx.smartphonebci.driver.dsp.BinnedValues;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 
@@ -24,38 +25,42 @@ import java.util.Arrays;
  * Use the {@link SpectrumPlot#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SpectrumPlot extends Fragment {
+public class SpectrumPlot extends Fragment
+{
 
     private XYPlot plot;
     private Spectrum spectrum = new Spectrum("Spectrum");
     private double max = Double.MIN_VALUE;
-    public SpectrumPlot() {
+
+    public SpectrumPlot()
+    {
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-
      * @return A new instance of fragment SpectrumPlot.
      */
     // TODO: Rename and change types and number of parameters
-    public static SpectrumPlot newInstance() {
+    public static SpectrumPlot newInstance()
+    {
         SpectrumPlot fragment = new SpectrumPlot();
         return fragment;
 
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        MainActivity.plot=Optional.of(this);
+        MainActivity.plot = Optional.of(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+                             Bundle savedInstanceState)
+    {
 
         View view = inflater.inflate(R.layout.fragment_spectrum_plot, container, false);
 
@@ -63,20 +68,18 @@ public class SpectrumPlot extends Fragment {
         plot = (XYPlot) view.findViewById(R.id.plot);
 
 
-
         // create formatters to use for drawing a series using LineAndPointRenderer
         // and configure them from xml:
-        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.GREEN,null,null,null);
+        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.GREEN, null, null, null);
 
         //series1//Format.setPointLabelFormatter(new PointLabelFormatter());
 
-       // series1Format.setInterpolationParams(
+        // series1Format.setInterpolationParams(
         //        new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
 
 
-
         // add a new series' to the xyplot:
-        plot.addSeries(spectrum , series1Format);
+        plot.addSeries(spectrum, series1Format);
 
 
         // reduce the number of range labels
@@ -85,75 +88,93 @@ public class SpectrumPlot extends Fragment {
         // rotate domain labels 45 degrees to make them more compact horizontally:
         plot.getGraphWidget().setDomainLabelOrientation(-45);
         plot.getGraphWidget().setPaddingBottom(50);
-        plot.getGraphWidget().setPaddingLeft(150);
+        plot.getGraphWidget().setPaddingLeft(120);
+        plot.getGraphWidget().setPaddingTop(20);
+        plot.getGraphWidget().setPaddingRight(20);
 
-     //   plot.setRangeBoundaries(0,1,BoundaryMode.FIXED);
+        //   plot.setRangeBoundaries(0,1,BoundaryMode.FIXED);
 
+        //setting up the value formats
+        plot.setRangeValueFormat(new DecimalFormat("0.00"));
+        plot.setDomainValueFormat(new DecimalFormat("0.00"));
         // Inflate the layout for this fragment
         return view;
     }
 
-    public void push(BinnedValues values){
+    public void push(BinnedValues values)
+    {
         spectrum.setValues(values);
         plot.redraw();
     }
 
 
-    class Spectrum implements XYSeries {
+    class Spectrum implements XYSeries
+    {
         private Optional<BinnedValues> values = Optional.absent();
 
         private String title;
 
-        private double epochMax=Double.MIN_VALUE;
-        public Spectrum(String title) {
+        private double epochMax = Double.MIN_VALUE;
+
+        public Spectrum(String title)
+        {
             this.title = title;
         }
 
 
-        public void setValues(BinnedValues binnedValues){
+        public void setValues(BinnedValues binnedValues)
+        {
             values = Optional.of(binnedValues);
         }
 
         @Override
-        public String getTitle() {
+        public String getTitle()
+        {
             return title;
         }
 
         @Override
-        public int size() {
+        public int size()
+        {
 
-            if(values.isPresent()){
+            if (values.isPresent())
+            {
                 //len minus 10Hz
-                int tenHz = (int)(10/values.get().getResolution());
+                int tenHz = (int) (10 / values.get().getResolution());
                 double[] vals = Arrays.copyOfRange(
                         values.get().getValues(),
-                        (int)(4/values.get().getResolution()),
-                        values.get().getValues().length-(1+tenHz));
+                        (int) (4 / values.get().getResolution()),
+                        values.get().getValues().length - (1 + tenHz));
 
                 epochMax = DoubleMath.mean(vals);
-                if (epochMax ==0){
-                    epochMax =1;
+                if (epochMax == 0)
+                {
+                    epochMax = 1;
                 }
-                return values.get().getValues().length-tenHz;
+                return values.get().getValues().length - tenHz;
             }
             return 0;
         }
 
         @Override
-        public Number getX(int index) {
-            if (values.isPresent()) {
-                return values.get().getResolution()*index;
+        public Number getX(int index)
+        {
+            if (values.isPresent())
+            {
+                return values.get().getResolution() * index;
 
             }
             return 0;
         }
 
         @Override
-        public Number getY(int index) {
+        public Number getY(int index)
+        {
             // avoid showing carrier frequencies
-            if ( values.isPresent() && index > 4/values.get().getResolution()) {
+            if (values.isPresent() && index > 4 / values.get().getResolution())
+            {
 
-                double y = values.get().getValues()[index]/epochMax;
+                double y = values.get().getValues()[index] / epochMax;
                 return y;
             }
             return 0;
