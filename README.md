@@ -39,3 +39,4 @@ TODO:
  - Use a C/C++ fft implementation.
  - Move the driver functionality to a separate project so it can be easily used in other apps.
  - The code is a bad state due to different rushes and time constrains, it needs a clean up. 
+ - The alpha viewer should baseline to the self band not to the relative values 
