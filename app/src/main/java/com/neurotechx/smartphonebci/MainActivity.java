@@ -1,7 +1,6 @@
 package com.neurotechx.smartphonebci;
 
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -60,11 +59,11 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
 
             }
         });
-        classBoxes[0] = (TextView) findViewById(R.id.class_view);
-        classBoxes[1] = (TextView) findViewById(R.id.class_view1);
-        bar = (SeekBar) findViewById(R.id.seekBar);
-        bar.setIndeterminate(false);
-        bar.setMax(100);
+//        classBoxes[0] = (TextView) findViewById(R.id.class_view);
+//        classBoxes[1] = (TextView) findViewById(R.id.class_view1);
+//        bar = (SeekBar) findViewById(R.id.seekBar);
+//        bar.setIndeterminate(false);
+//        bar.setMax(100);
 
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager) findViewById(R.id.container);
@@ -107,19 +106,19 @@ public class MainActivity extends AppCompatActivity implements BinnedValuesListe
             @Override
             public void run() {
 
-                double progress = e.getEpochProgress();
-                classBoxes[0].setText(String.format(FORMAT,e.getClassDistribution()[0]));
-                classBoxes[1].setText(String.format(FORMAT,e.getClassDistribution()[1]));
-                int ior=(int)(e.getEpochProgress()*100);
-                bar.setProgress((int)(e.getEpochProgress()*100));
-                //end of epoch mark the final selection
-                if (e.getEpochProgress()==1.){
-                    int clazz = e.getSelectedClass();
-                    classBoxes[0].setBackgroundColor(Color.TRANSPARENT);
-
-                    classBoxes[1].setBackgroundColor(Color.TRANSPARENT);
-                    classBoxes[clazz].setBackgroundColor(Color.GREEN);
-                }
+//                double progress = e.getEpochProgress();
+//                classBoxes[0].setText(String.format(FORMAT,e.getClassDistribution()[0]));
+//                classBoxes[1].setText(String.format(FORMAT,e.getClassDistribution()[1]));
+//                int ior=(int)(e.getEpochProgress()*100);
+//                bar.setProgress((int)(e.getEpochProgress()*100));
+//                //end of epoch mark the final selection
+//                if (e.getEpochProgress()==1.){
+//                    int clazz = e.getSelectedClass();
+//                    classBoxes[0].setBackgroundColor(Color.TRANSPARENT);
+//
+//                    classBoxes[1].setBackgroundColor(Color.TRANSPARENT);
+//                    classBoxes[clazz].setBackgroundColor(Color.GREEN);
+//                }
             }
         });
     }

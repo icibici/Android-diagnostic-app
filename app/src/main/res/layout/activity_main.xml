@@ -19,28 +19,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:text="0.00"
-        android:id="@+id/class_view"
-        android:focusableInTouchMode="false"
-        android:gravity="center_vertical|center"
-        android:layout_alignTop="@+id/carrier_button"
-        android:layout_toRightOf="@+id/carrier_button"
-        android:layout_toEndOf="@+id/carrier_button" />
-
-    <TextView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:text="0.00"
-        android:id="@+id/class_view1"
-        android:layout_marginLeft="27dp"
-        android:layout_marginStart="27dp"
-        android:gravity="center_vertical|center"
-        android:layout_toRightOf="@+id/class_view"
-        android:layout_toEndOf="@+id/class_view" />
-
 
     <!--<fragment-->
         <!--android:layout_width="wrap_content"-->
@@ -63,17 +41,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <SeekBar
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:layout_alignRight="@+id/container"
-        android:layout_alignEnd="@+id/container"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/class_view1"
-        android:layout_toEndOf="@+id/class_view1"
-        android:max="100"
-        android:progress="80" />
+        android:text="@string/version"
+        tools:text="@string/version" />
 
 
 </RelativeLayout>
