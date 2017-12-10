@@ -18,8 +18,8 @@ This repository is part of a Hardware - Software system:
 
 ## The Android app
 
-This is the Android app for the [icibici project] (https://icibici.github.io/site/).
-It allows to visualise the data read from the [Icibici hardware ] (https://github.com/icibici/smartphone-bci-hardware/) and it is under heavy development.
+This is the Android app for the [icibici project](https://icibici.github.io/site/).
+It allows to visualise the data read from the [Icibici hardware ](https://github.com/icibici/smartphone-bci-hardware/) and it is under heavy development.
 
 There are three tabs (change from one to another by swiping) 
 
