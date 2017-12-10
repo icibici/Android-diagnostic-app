@@ -4,22 +4,22 @@
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
 
-# SMARTPHONE BCI
+# ICIBICI
 
-[Smartphone-bci](https://jmanart.github.io/smartphone-bci-hardware) is a hardware / software platform born with the intention of Developing an EEG under £20.
+[Icibici](https://icibici.github.io/smartphone-bci-hardware) is a hardware / software platform born with the intention of Developing an EEG under £20.
 
 This is the **Software Repository** for the smartphone BCI Project Android App
 
 This repository is part of a Hardware - Software system:
 
-* [SMARTPHONE-BCI](https://github.com/capitancambio/smartphone-bci)
-* [SMARTPHONE-BCI-HARDWARE](https://github.com/jmanart/smartphone-bci-hardware)
+* [icibici](https://github.com/icibici/smartphone-bci)
+* [icibici-hardware](https://github.com/icibici/smartphone-bci-hardware)
 
 
 ## The Android app
 
-This is the Android app for the [SmartphoneBCI project] (https://jmanart.github.io/smartphone-bci-hardware/).
-It allows to visualise the data read from the [SmartphoneBCI hardware ] (https://github.com/jmanart/smartphone-bci-hardware/) and it is under heavy development.
+This is the Android app for the [icibici project] (https://icibici.github.io/site/).
+It allows to visualise the data read from the [Icibici hardware ] (https://github.com/icibici/smartphone-bci-hardware/) and it is under heavy development.
 
 There are three tabs (change from one to another by swiping) 
 
